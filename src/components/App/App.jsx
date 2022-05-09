@@ -1,9 +1,10 @@
 import React from 'react';
 import {BrowserRouter} from "react-router-dom";
-import './App.css';
+import 'components/App/App.css';
 
-import Header from '../Header/Header';
-import AppRoutes from '../../pages/routes';
+import Header from 'components/Header/Header';
+import AppRoutes from 'pages/routes';
+
 
 const App = () => {
     return (

@@ -1,9 +1,10 @@
 import React from "react";
 import {Routes, Route} from 'react-router-dom';
 
-import GlobalFeed from "./globalFeed/globalFeed";
-import Article from "./article/article";
-import Authentication from "./authentication/authentication";
+import GlobalFeed from "pages/globalFeed/globalFeed";
+import Article from "pages/article/article";
+import Authentication from "pages/authentication/authentication";
+
 
 const AppRoutes = () => {
     return (
