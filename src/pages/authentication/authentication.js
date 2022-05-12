@@ -2,6 +2,7 @@ import React from "react";
 import {Link, useLocation, useParams, Navigate} from "react-router-dom";
 
 import useFetch from "hooks/useFetch";
+import useLocalStorage from "hooks/useLocalStorage";
 
 
 const Authentication = () => {
@@ -17,8 +18,9 @@ const Authentication = () => {
     const [username, setUsername] = React.useState('');
     const [isSuccessfulSubmit, setIsSuccessfulSubmit] = React.useState(false);
     const [{isLoading, response, error}, doFetch] = useFetch(apiUrl);
+    const [token, setToken] = useLocalStorage('token');
 
-    console.log(location, params, isLogin);
+    console.log(location, params, isLogin, token);
 
 
     const handleSubmit = (event) => {
@@ -36,9 +38,9 @@ const Authentication = () => {
         if (!response) {
             return;
         }
-        localStorage.setItem('token', response.user.token);
+        setToken(response.user.token);
         setIsSuccessfulSubmit(true);
-    }, [response]);
+    }, [response, setToken]);
 
     if (isSuccessfulSubmit) {
         return <Navigate to="/" />
