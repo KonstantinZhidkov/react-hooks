@@ -4,16 +4,17 @@ import 'components/App/App.css';
 
 import Header from 'components/Header/Header';
 import AppRoutes from 'pages/routes';
+import {CurrentUserProvider} from "contexts/currentUser";
 
 
 const App = () => {
     return (
-        <div className="App">
+        <CurrentUserProvider>
             <BrowserRouter>
                 <Header />
                 <AppRoutes />
             </BrowserRouter>
-        </div>
+        </CurrentUserProvider>
     );
 }
 

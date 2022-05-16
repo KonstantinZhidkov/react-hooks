@@ -3,6 +3,7 @@ import {Link, useLocation, useParams, Navigate} from "react-router-dom";
 
 import useFetch from "hooks/useFetch";
 import useLocalStorage from "hooks/useLocalStorage";
+import {CurrentUserContext} from "contexts/currentUser";
 
 
 const Authentication = () => {
@@ -19,8 +20,11 @@ const Authentication = () => {
     const [isSuccessfulSubmit, setIsSuccessfulSubmit] = React.useState(false);
     const [{isLoading, response, error}, doFetch] = useFetch(apiUrl);
     const [token, setToken] = useLocalStorage('token');
+    const [currentUserState, setCurrentUserState] = React.useContext(CurrentUserContext);
 
-    console.log(location, params, isLogin, token);
+    console.log(currentUserState);
+
+    //console.log(location, params, isLogin, token);
 
 
     const handleSubmit = (event) => {
@@ -40,7 +44,13 @@ const Authentication = () => {
         }
         setToken(response.user.token);
         setIsSuccessfulSubmit(true);
-    }, [response, setToken]);
+        setCurrentUserState(state => ({
+            ...state,
+            isLoggedIn: true,
+            isLoading: false,
+            currentUser: response.user
+        }));
+    }, [response, setToken, setCurrentUserState]);
 
     if (isSuccessfulSubmit) {
         return <Navigate to="/" />
