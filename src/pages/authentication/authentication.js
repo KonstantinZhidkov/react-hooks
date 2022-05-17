@@ -5,6 +5,8 @@ import useFetch from "hooks/useFetch";
 import useLocalStorage from "hooks/useLocalStorage";
 import {CurrentUserContext} from "contexts/currentUser";
 
+import BackendErrorMessages from "components/BackendErrorMessages/BackendErrorMessages";
+
 
 const Authentication = () => {
     const location = useLocation();
@@ -22,7 +24,7 @@ const Authentication = () => {
     const [token, setToken] = useLocalStorage('token');
     const [currentUserState, setCurrentUserState] = React.useContext(CurrentUserContext);
 
-    console.log(currentUserState);
+    //console.log(currentUserState);
 
     //console.log(location, params, isLogin, token);
 
@@ -66,6 +68,7 @@ const Authentication = () => {
                             <Link to={descriptionLink}>{descriptionText}</Link>
                         </p>
                         <form onSubmit={handleSubmit}>
+                            {error && <BackendErrorMessages backendErrors={error.errors} />}
                             <fieldset>
                                 {!isLogin && (
                                     <fieldset className="form-group">

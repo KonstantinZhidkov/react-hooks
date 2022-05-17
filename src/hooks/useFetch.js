@@ -20,12 +20,12 @@ const useFetch = url => {
 
         axios(baseUrl + url, options)
             .then(resolve => {
-                setIsLoading(false);
                 setResponse(resolve.data);
+                setIsLoading(false);
                 console.log(resolve);
             }).catch(error => {
-                setIsLoading(false);
                 setError(error.response.data);
+                setIsLoading(false);
                 console.log(error);
             })
         }, [isLoading, options, url]);
