@@ -12,18 +12,16 @@ const useFetch = url => {
     const [options, setOptons] = React.useState({}); // Additional variable. So we can use options both inside doFetch and useEffect
     const [token] = useLocalStorage('token');
 
-    const doFetch = (options = {}) => {
+    const doFetch = React.useCallback((options = {}) => {
         setOptons(options);
         setIsLoading(true);
-    };
+    }, []);
 
     React.useEffect(() => {
         const requestOptions = {
             ...options,
-            ...{
-                headers: {
-                    authorization: token ? `Token ${token}` : ''
-                }
+            headers: {
+                authorization: token ? `Token ${token}` : ''
             }
         }
 
